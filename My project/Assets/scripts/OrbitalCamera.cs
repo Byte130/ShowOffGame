@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class OrbitalCamera : MonoBehaviour
 {
-
     public Transform Player;
     public Transform orientation;
     public Transform PlayerObj;
@@ -10,6 +9,12 @@ public class OrbitalCamera : MonoBehaviour
 
     public float rotationSpeed;
 
+
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
     void Update()
     {
         //rotate orientation
@@ -18,9 +23,10 @@ public class OrbitalCamera : MonoBehaviour
 
         //rotate player object
         float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-        Vector3 inputDir = orientation.forward * verticalInput + orientation.right * horizontalInput;   
-
+       //float verticalInput = Input.GetAxis("Vertical");
+        Vector3 inputDir = orientation.right * horizontalInput;
+            //+ orientation.forward * verticalInput;   
+       
         if (inputDir != Vector3.zero)
         {
             PlayerObj.forward = Vector3.Slerp(PlayerObj.forward, inputDir.normalized, Time.deltaTime * rotationSpeed);
