@@ -1,36 +1,39 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class Playermovement : MonoBehaviour
 {
-    public float speed = 5f;
-    public Rigidbody Rigidbody;
-
-    public InputActionReference flashlight;
-
-    public InputActionReference move;
+    [SerializeField] public Rigidbody Rb;
+    [SerializeField] public float speed = 5f;
+    [SerializeField] public float turnSpeed = 1f;
 
     private Vector2 dir;
 
-    private void Flashlight(InputAction.CallbackContext flashlight)
+    [SerializeField] public InputActionReference flashlight;
+    [SerializeField] public InputActionReference move;
+
+    [SerializeField] public Transform cam;
+
+    private void Start()
     {
-        Debug.Log("Flashlight toggled");
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
-     
+
+    private void Flashlight(InputAction.CallbackContext obj)
+    {
+        Debug.Log("Flash");
+    }
+
     private void OnEnable()
     {
         flashlight.action.started += Flashlight;
     }
+
     private void OnDisable()
     {
         flashlight.action.started -= Flashlight;
     }
-
-    void Start()
-    {
-        
-    }
-
 
     void Update()
     {
@@ -39,6 +42,31 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Rigidbody.MovePosition(Rigidbody.position + new Vector3(dir.x, 0, dir.y) * speed * Time.fixedDeltaTime);
+        Vector3 forward = cam.forward;
+        Vector3 right = cam.right;
+
+
+        forward.y = 0f;
+        right.y = 0f;
+
+        forward.Normalize();
+        right.Normalize();
+
+        Vector3 moveDir = forward * dir.y + right * dir.x;
+
+        Vector3 velocity = moveDir * speed;
+        velocity.y = Rb.linearVelocity.y;
+        Rb.linearVelocity = velocity;
+
+        if (moveDir.sqrMagnitude > 0.01f)
+        {
+            Quaternion targetRot = Quaternion.LookRotation(moveDir);
+
+            transform.rotation = Quaternion.Lerp(
+                transform.rotation,
+                targetRot,
+                turnSpeed * Time.deltaTime
+            );
+        }
     }
 }
