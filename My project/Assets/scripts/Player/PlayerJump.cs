@@ -9,6 +9,9 @@ public class PlayerJump : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void Update()
@@ -30,6 +33,7 @@ public class PlayerJump : MonoBehaviour
         if  (collision.gameObject.CompareTag("DeathPit"))
         {
             SceneManager.LoadScene(2);
+            Cursor.visible = true;  
         }
     }
 }
