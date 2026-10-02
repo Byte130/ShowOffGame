@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class PlayerJump : MonoBehaviour
 {
     private float jumpForce = 7.0f;
@@ -25,6 +25,11 @@ public class PlayerJump : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
+        }
+
+        if  (collision.gameObject.CompareTag("DeathPit"))
+        {
+            SceneManager.LoadScene(2);
         }
     }
 }
