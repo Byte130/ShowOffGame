@@ -10,6 +10,7 @@ TagManager:
   - RightWall
   - LeftWall
   - PlayerSword
+  - StartBossFight
   layers:
   - Default
   - TransparentFX

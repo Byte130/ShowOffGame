@@ -29,11 +29,5 @@ public class PlayerJump : MonoBehaviour
         {
             isGrounded = true;
         }
-
-        if  (collision.gameObject.CompareTag("DeathPit"))
-        {
-            SceneManager.LoadScene(2);
-            Cursor.visible = true;  
-        }
     }
 }

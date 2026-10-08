@@ -4,8 +4,8 @@ using UnityEngine.InputSystem;
 public class Playermovement : MonoBehaviour
 {
     [SerializeField] public Rigidbody Rb;
-    [SerializeField] public float speed = 5f;
-    [SerializeField] public float turnSpeed = 10f;
+    [SerializeField] public float speed = 999;
+    [SerializeField] public float turnSpeed = 100;
 
     private Vector2 dir;
 
@@ -13,11 +13,6 @@ public class Playermovement : MonoBehaviour
     [SerializeField] public InputActionReference move;
 
     [SerializeField] public Transform cam;
-
-    private void Start()
-    {
-    
-    }
 
     private void Flashlight(InputAction.CallbackContext obj)
     {
