@@ -33,17 +33,18 @@ public class CastleManager : MonoBehaviour
                     currentState = states.Attack1;
                 }
 
+                
+                break;
+
+            case states.Attack1:
+
                 SpawnTime += Time.deltaTime;
                 if (SpawnTime >= SpawnInterval) {
                     SpawnTime = 0;
 
-                    //Instantiate(CannonBall, FirePoint1.transform.position, FirePoint1.transform.rotation);
-                    
+                    Instantiate(CannonBall, FirePoint1.transform.position, FirePoint1.transform.rotation);
+                    Instantiate(CannonBall, FirePoint2.transform.position, FirePoint2.transform.rotation);
                 }
-                break;
-
-            case states.Attack1:
-                Debug.Log("Attack1 Started");
 
                 break;
 

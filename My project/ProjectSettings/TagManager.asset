@@ -11,6 +11,7 @@ TagManager:
   - LeftWall
   - PlayerSword
   - StartBossFight
+  - CannonBall
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - Water
   - UI
   - Ground
-  - 
+  - CannonBall
   - 
   - 
   - 

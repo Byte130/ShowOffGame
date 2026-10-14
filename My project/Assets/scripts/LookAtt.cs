@@ -2,14 +2,19 @@ using UnityEngine;
 
 public class LookAtt : MonoBehaviour
 {
-
     public GameObject Target;
+
+    public float RotationSpeed = 5f;
 
     void Update()
     {
-        Vector3 Look = transform.InverseTransformPoint(Target.transform.position);
-        float Angle = Mathf.Atan2(Look.x, Look.z) * Mathf.Rad2Deg;
+        if (Target == null) return;
 
-        transform.Rotate(Angle, Angle, Angle);
+        Vector3 direction = Target.transform.position - transform.position;
+        if (direction.sqrMagnitude < 0.000001f) return;
+
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, RotationSpeed * Time.deltaTime);
+
     }
 }

@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 136672512877239190}
   - component: {fileID: 4460239576826330888}
   - component: {fileID: 2945455005628314137}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SpikeyBall
-  m_TagString: Untagged
+  m_TagString: CannonBall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
