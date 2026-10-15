@@ -12,6 +12,7 @@ TagManager:
   - PlayerSword
   - StartBossFight
   - CannonBall
+  - CastleHit
   layers:
   - Default
   - TransparentFX

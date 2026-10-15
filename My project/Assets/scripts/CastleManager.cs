@@ -21,6 +21,9 @@ public class CastleManager : MonoBehaviour
     private float SpawnInterval = 5;
     private float SpawnTime = 0;
 
+    private float ReloadTime = 40;
+    private float ReloadTimer = 0;
+
     public GameObject CastleSeesPlayerBox;
 
     void Update()
@@ -44,6 +47,13 @@ public class CastleManager : MonoBehaviour
 
                     Instantiate(CannonBall, FirePoint1.transform.position, FirePoint1.transform.rotation);
                     Instantiate(CannonBall, FirePoint2.transform.position, FirePoint2.transform.rotation);
+                }
+
+                ReloadTimer += Time.deltaTime;
+                if (ReloadTimer >= ReloadTime)
+                {
+                    ReloadTimer = 0;
+                    currentState = states.Reloading;
                 }
 
                 break;
