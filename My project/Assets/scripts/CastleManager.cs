@@ -6,25 +6,27 @@ public class CastleManager : MonoBehaviour
 
     public GameObject PlayerCannon;
     public GameObject DrawBridge;
+    public GameObject Arrow;
 
-    public GameObject Cannon1;
     public GameObject FirePoint1;
-    public GameObject Cannon2;
     public GameObject FirePoint2;
-    public GameObject Cannon3;
     public GameObject FirePoint3;
-    public GameObject Cannon4;
     public GameObject FirePoint4;
 
     public GameObject CannonBall;
 
-    private float SpawnInterval = 5;
+    private float SpawnInterval = 3   ;
     private float SpawnTime = 0;
 
     private float ReloadTime = 40;
     private float ReloadTimer = 0;
 
     public GameObject CastleSeesPlayerBox;
+    
+    private void Start()
+    {
+        Arrow.SetActive(false);
+    }
 
     void Update()
     {
@@ -36,7 +38,7 @@ public class CastleManager : MonoBehaviour
                     currentState = states.Attack1;
                 }
 
-                
+                  
                 break;
 
             case states.Attack1:
@@ -64,10 +66,14 @@ public class CastleManager : MonoBehaviour
 
 
             case states.Reloading:
-                Debug.Log("Reloading Started");
+
+                Arrow.SetActive(true);
+                
+
                 break;
 
             case states.Dead:
+                Arrow.SetActive(false);
                 Debug.Log("Dead Started");
                 break;
         }

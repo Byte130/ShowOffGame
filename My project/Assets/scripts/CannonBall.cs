@@ -12,4 +12,12 @@ public class CannonBall : MonoBehaviour
         rb.AddForce(transform.forward * Speed, ForceMode.Force);
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            Destroy(gameObject, 2f);
+        }
+    }
+
 }
