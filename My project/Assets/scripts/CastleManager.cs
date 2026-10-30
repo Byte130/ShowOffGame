@@ -4,6 +4,9 @@ public class CastleManager : MonoBehaviour
 {
     public states currentState = states.Idle;
 
+    public int Lives = 2;
+    public bool IsReloading = false;
+
     public GameObject PlayerCannon;
     public GameObject DrawBridge;
     public GameObject Arrow;
@@ -14,7 +17,6 @@ public class CastleManager : MonoBehaviour
     public GameObject FirePoint4;
 
     public GameObject CannonBall;
-    public GameObject ExplosionPrefab;
 
     private float SpawnInterval = 3   ;
     private float SpawnTime = 0;
@@ -29,8 +31,15 @@ public class CastleManager : MonoBehaviour
         Arrow.SetActive(false);
     }
 
+    
+
     void Update()
     {
+        if (Lives <= 0)
+        {
+            currentState = states.Dead;
+        }
+
         switch (currentState)
         {
             case states.Idle:
@@ -62,19 +71,40 @@ public class CastleManager : MonoBehaviour
                 break;
 
             case states.Attack2:
-                Debug.Log("Attack2 Started");
+                SpawnTime += Time.deltaTime;
+                if (SpawnTime >= SpawnInterval)
+                {
+                    SpawnTime = 0;
+
+                    Instantiate(CannonBall, FirePoint1.transform.position, FirePoint1.transform.rotation);
+                    Instantiate(CannonBall, FirePoint2.transform.position, FirePoint2.transform.rotation);
+                    Instantiate(CannonBall, FirePoint3.transform.position, FirePoint3.transform.rotation);
+                    Instantiate(CannonBall, FirePoint4.transform.position, FirePoint4.transform.rotation);
+                }
+
+                ReloadTimer += Time.deltaTime;
+                if (ReloadTimer >= ReloadTime)
+                {
+                    ReloadTimer = 0;
+                    currentState = states.Reloading;
+                }
+
                 break;
 
 
             case states.Reloading:
 
                 Arrow.SetActive(true);
-                
+                IsReloading = true;
 
+                if (IsReloading == false) 
+                {
+                    Arrow.SetActive(false);
+                    currentState = states.Attack2;
+                }
                 break;
 
             case states.Dead:
-                Arrow.SetActive(false);
                 Debug.Log("Dead Started");
                 break;
         }
@@ -88,4 +118,14 @@ public class CastleManager : MonoBehaviour
         Reloading,
         Dead,
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("CannonBall"))
+        {
+            Lives -= 1;
+            IsReloading = false;
+        }
+    }
 }
+
