@@ -14,6 +14,7 @@ public class CastleManager : MonoBehaviour
     public GameObject FirePoint4;
 
     public GameObject CannonBall;
+    public GameObject ExplosionPrefab;
 
     private float SpawnInterval = 3   ;
     private float SpawnTime = 0;

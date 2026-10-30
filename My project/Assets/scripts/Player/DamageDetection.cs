@@ -8,8 +8,8 @@ public class PLayerTakesHits : MonoBehaviour
 
         if (collision.gameObject.CompareTag("DeathPit"))
         {
-            SceneManager.LoadScene(2);
             Cursor.visible = true;
+            SceneManager.LoadScene(2);
         }
 
         if (collision.gameObject.CompareTag("StartBossFight"))
@@ -20,8 +20,9 @@ public class PLayerTakesHits : MonoBehaviour
         if (collision.gameObject.CompareTag("CannonBall"))
         { 
             Destroy(collision.gameObject);
-            SceneManager.LoadScene(2);
             Cursor.visible = true;
+            SceneManager.LoadScene(2);
+            
         }
     }
 }
